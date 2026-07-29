@@ -1,0 +1,463 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE OVERRIDES — 0–768px only
+   Desktop layout untouched.
+   Premium iOS-level floating capsule system.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Utility: hide scrollbar but keep scroll */
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Global iOS Touch Reset */
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+
+/* ─── FOUNDATION ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    :root {
+        /* iOS-standard rounded corners */
+        --radius-mobile: 28px;
+        --radius-mobile-inner: 16px;
+        
+        /* Premium depth system */
+        --depth-1: 0 4px 12px rgba(0, 0, 0, 0.05); /* Buttons */
+        --depth-2: 0 12px 32px rgba(0, 0, 0, 0.12); /* Cards */
+        --depth-3: 0 24px 64px rgba(0, 0, 0, 0.20); /* Sheets */
+        
+        --main-margin-left: 0px !important;
+        --main-margin: 0px !important;
+    }
+
+    /* Premium iOS Glassmorphism Tokens */
+    .mobile-glass {
+        background: rgba(255, 255, 255, 0.7) !important;
+        backdrop-filter: blur(50px) saturate(210%) !important;
+        -webkit-backdrop-filter: blur(50px) saturate(210%) !important;
+        z-index: 50 !important;
+    }
+
+    .dark .mobile-glass {
+        background: rgba(18, 18, 22, 0.7) !important;
+        backdrop-filter: blur(50px) saturate(210%) !important;
+        -webkit-backdrop-filter: blur(50px) saturate(210%) !important;
+    }
+
+    .mobile-glass-border {
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        box-shadow: 
+            inset 0 1px 0 rgba(255, 255, 255, 0.5), 
+            0 8px 32px rgba(0, 0, 0, 0.05) !important;
+        position: relative;
+    }
+
+    .dark .mobile-glass-border {
+        border-color: rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 
+            inset 0 1px 0 rgba(255, 255, 255, 0.08), 
+            0 8px 32px rgba(0, 0, 0, 0.25) !important;
+    }
+
+    /* iOS safe area padding */
+    html {
+        padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+
+    /* Touch feedback — haptic-feel scale */
+    .touch-scale:active,
+    button:active,
+    a:active,
+    [role="button"]:active {
+        transform: scale(0.96) !important;
+        transition: transform 60ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    /* Premium iOS Glassmorphism Card */
+    .mobile-card {
+        background: rgba(255, 255, 255, 0.7) !important;
+        backdrop-filter: blur(28px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+        border-radius: 28px !important;
+    }
+
+    .dark .mobile-card {
+        background: rgba(30, 30, 36, 0.6) !important;
+        backdrop-filter: blur(28px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .mobile-scroll-x {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        display: flex;
+        gap: 16px;
+    }
+
+    .mobile-scroll-x::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* 🦴 Neural Skeleton Loading */
+    @keyframes skeleton-shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    .neural-skeleton {
+        background: linear-gradient(90deg, 
+            rgba(255, 255, 255, 0.03) 25%, 
+            rgba(255, 255, 255, 0.08) 50%, 
+            rgba(255, 255, 255, 0.03) 75%
+        );
+        background-size: 200% 100%;
+        animation: skeleton-shimmer 2s infinite linear;
+        border-radius: 20px;
+    }
+
+    .light .neural-skeleton {
+        background: linear-gradient(90deg, 
+            rgba(0, 0, 0, 0.03) 25%, 
+            rgba(0, 0, 0, 0.06) 50%, 
+            rgba(0, 0, 0, 0.03) 75%
+        );
+    }
+
+    /* Prevent text resize on rotate */
+    body {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    /* Smooth scrolling */
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Reduce blur on mobile for perf */
+    .inspector-panel,
+    .floating-command-bar,
+    .zoom-hud {
+        backdrop-filter: blur(20px) saturate(140%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    }
+
+    /* ─── MOBILE STUDIO CANVAS ─── Premium editor background */
+    .mobile-studio-canvas {
+        background:
+            radial-gradient(ellipse at 50% 0%, rgba(0,122,255,0.03) 0%, transparent 60%),
+            var(--surface, #f5f5f7);
+    }
+
+    .dark .mobile-studio-canvas {
+        background:
+            radial-gradient(ellipse at 50% 0%, rgba(0,122,255,0.06) 0%, transparent 60%),
+            #0a0a0c !important;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Landing page navbar — proper mobile proportions */
+    .landing-navbar>div {
+        border-radius: var(--radius-2xl) !important;
+        padding: 0 var(--space-4) !important;
+    }
+
+    .mobile-hamburger-btn {
+        background: transparent;
+        border: none !important;
+        box-shadow: none;
+        color: currentColor;
+        opacity: 0.85;
+        transition: opacity 120ms ease-out;
+    }
+
+    .mobile-hamburger-btn:active {
+        opacity: 1;
+        background: transparent !important;
+    }
+
+    .dark .mobile-hamburger-btn {
+        background: transparent;
+        border: none !important;
+        box-shadow: none;
+        color: currentColor;
+        opacity: 0.85;
+    }
+
+    .dark .mobile-hamburger-btn:active {
+        opacity: 1;
+        background: transparent !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .landing-navbar>div {
+        padding: 0 var(--space-6) !important;
+    }
+}
+
+/* ─── SIDEBAR DRAWER — iOS Sheet Style ─────────────────────────── */
+@media (max-width: 768px) {
+    .mobile-sidebar-drawer {
+        width: 86% !important;
+        max-width: 320px !important;
+        border-radius: 0 var(--radius-2xl) var(--radius-2xl) 0 !important;
+        margin: 0 !important;
+        top: 0 !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        background-color: var(--surface) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30) !important;
+        padding-bottom: env(safe-area-inset-bottom, 16px) !important;
+    }
+
+    .dark .mobile-sidebar-drawer {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.60) !important;
+    }
+
+    .mobile-sidebar-overlay {
+        background-color: rgba(0, 0, 0, 0.25) !important;
+        backdrop-filter: blur(6px) !important;
+        -webkit-backdrop-filter: blur(6px) !important;
+    }
+}
+
+/* ─── PROJECTS PAGE ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .projects-page-container {
+        padding: var(--space-4) var(--space-4) var(--space-8) !important;
+    }
+
+    .projects-page-header {
+        margin-bottom: var(--space-4) !important;
+        padding: 0 var(--space-1) !important;
+    }
+
+    .projects-page-header h1 {
+        font-size: 24px !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-4) !important;
+    }
+
+    .projects-filter-bar {
+        margin-bottom: var(--space-4) !important;
+        height: 48px !important;
+        border-radius: var(--radius-2xl) !important;
+        padding: 0 var(--space-4) !important;
+        box-shadow: var(--depth-1) !important;
+    }
+
+    .projects-empty-state {
+        margin-top: var(--space-8) !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: var(--space-8) var(--space-5) !important;
+        border-radius: var(--radius-2xl) !important;
+        box-shadow: var(--depth-1) !important;
+    }
+}
+
+/* ─── SETTINGS PAGE ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .settings-page-container {
+        padding: var(--space-4) var(--space-4) var(--space-8) !important;
+    }
+
+    .settings-page-container h1 {
+        font-size: 24px !important;
+        padding: 0 var(--space-1) !important;
+    }
+
+    .settings-card {
+        padding: var(--space-4) !important;
+        border-radius: var(--radius-2xl) !important;
+        box-shadow: var(--depth-1) !important;
+    }
+
+    .settings-switch-row {
+        min-height: 52px !important;
+    }
+
+    .settings-profile-card {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: var(--space-3) !important;
+    }
+}
+
+/* ─── BATCH PAGE ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .batch-page-container {
+        padding: var(--space-4) var(--space-4) var(--space-8) !important;
+    }
+
+    .batch-page-container h1 {
+        font-size: 24px !important;
+    }
+
+    .batch-layout {
+        flex-direction: column !important;
+        gap: var(--space-4) !important;
+    }
+
+    .batch-panel {
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: var(--radius-2xl) !important;
+        box-shadow: var(--depth-1) !important;
+    }
+
+    .batch-queue {
+        min-height: 240px !important;
+        max-height: 400px !important;
+        overflow-y: auto !important;
+    }
+}
+
+/* ─── EDITOR MOBILE ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Canvas floating */
+    .ios-pro-canvas {
+        border-radius: var(--radius-2xl) !important;
+        margin: var(--space-3) !important;
+        overflow: hidden !important;
+    }
+
+    .canvas-container {
+        border-radius: var(--radius-xl) !important;
+    }
+
+    /* Generate FAB safe area */
+    .mobile-generate-fab {
+        bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0)) !important;
+        left: var(--space-4) !important;
+        right: var(--space-4) !important;
+        height: 52px !important;
+        border-radius: var(--radius-xl) !important;
+        box-shadow: var(--depth-2) !important;
+    }
+
+    /* Tool sheet bottom */
+    .mobile-tool-sheet {
+        border-radius: var(--radius-2xl) var(--radius-2xl) 0 0 !important;
+        padding: var(--space-5) var(--space-4) !important;
+        padding-bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0)) !important;
+        box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .dark .mobile-tool-sheet {
+        box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.40) !important;
+    }
+
+    /* Mobile toolbar capsule — breathing space from bottom */
+    .mobile-capsule-toolbar {
+        margin: 0 var(--space-4) var(--space-5) var(--space-4) !important;
+        border-radius: var(--radius-xl) !important;
+        height: 44px !important;
+        box-shadow: var(--depth-1) !important;
+    }
+}
+
+/* ─── TYPOGRAPHY — Mobile scale ────────────────────────────────── */
+@media (max-width: 768px) {
+
+    h1,
+    .ios-large-title {
+        font-size: 26px !important;
+        font-weight: 900 !important;
+        line-height: 1.1 !important;
+        letter-spacing: -0.03em !important;
+    }
+
+    h2,
+    .ios-title {
+        font-size: 20px !important;
+        font-weight: 850 !important;
+        letter-spacing: -0.02em !important;
+    }
+
+    h3,
+    .ios-title3 {
+        font-size: 17px !important;
+    }
+
+    p,
+    .ios-body {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .ios-footnote,
+    .ios-caption {
+        font-size: 13px;
+    }
+}
+
+/* ─── CARDS & SURFACES — Mobile floating ───────────────────────── */
+@media (max-width: 768px) {
+
+    /* No element should touch screen edges */
+    .page-content-padded {
+        padding-left: var(--space-4) !important;
+        padding-right: var(--space-4) !important;
+    }
+
+    /* Consistent card radius + floating shadow */
+    .floating-card,
+    .project-card,
+    .settings-card,
+    .batch-card {
+        border-radius: var(--radius-2xl) !important;
+        box-shadow: var(--depth-1) !important;
+    }
+
+    /* All primary buttons — tappable floating */
+    .mobile-primary-btn {
+        height: 52px !important;
+        border-radius: var(--radius-xl) !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        box-shadow: var(--depth-1) !important;
+    }
+
+    /* All secondary buttons */
+    .mobile-secondary-btn {
+        height: 44px !important;
+        border-radius: var(--radius-lg) !important;
+        font-size: 14px !important;
+    }
+}
+
+/* ─── SAFE AREA — iOS notch + home indicator ───────────────────── */
+@media (max-width: 768px) {
+
+    /* Bottom fixed elements */
+    .mobile-bottom-fixed {
+        padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0)) !important;
+    }
+
+    /* Top safe area for floating navbar */
+    .mobile-safe-top {
+        padding-top: env(safe-area-inset-top, 0) !important;
+    }
+}

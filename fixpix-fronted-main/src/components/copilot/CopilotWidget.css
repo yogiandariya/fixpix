@@ -1,0 +1,523 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   🍎 Neural Copilot — iOS-Grade Design System
+   Premium glassmorphism, micro-interactions, and Apple HIG compliance
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── CSS Variables ────────────────────────────────────────────────────── */
+:root {
+  --copilot-glass: rgba(255, 255, 255, 0.72);
+  --copilot-glass-border: rgba(0, 0, 0, 0.06);
+  --copilot-glass-shadow: 0 24px 80px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  --copilot-blur: 60px;
+  --copilot-saturate: 200%;
+
+  --copilot-user-bubble: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+  --copilot-user-shadow: 0 4px 20px rgba(0, 122, 255, 0.25);
+  --copilot-assistant-bg: rgba(255, 255, 255, 0.85);
+  --copilot-assistant-border: rgba(0, 0, 0, 0.04);
+
+  --copilot-input-bg: rgba(118, 118, 128, 0.08);
+  --copilot-input-focus: rgba(0, 122, 255, 0.08);
+
+  --copilot-section-bg: rgba(255, 255, 255, 0.6);
+  --copilot-section-border: rgba(0, 0, 0, 0.04);
+  --copilot-section-hover: rgba(0, 122, 255, 0.04);
+
+  --copilot-radius-window: 28px;
+  --copilot-radius-bubble: 22px;
+  --copilot-radius-input: 24px;
+  --copilot-radius-section: 18px;
+  --copilot-radius-chip: 14px;
+  --copilot-radius-action: 12px;
+}
+
+.dark {
+  --copilot-glass: rgba(28, 28, 30, 0.78);
+  --copilot-glass-border: rgba(255, 255, 255, 0.08);
+  --copilot-glass-shadow: 0 32px 80px rgba(0, 0, 0, 0.5), inset 0 0.5px 0 rgba(255, 255, 255, 0.06);
+  
+  --copilot-user-bubble: linear-gradient(135deg, #0A84FF 0%, #5E5CE6 100%);
+  --copilot-user-shadow: 0 4px 24px rgba(10, 132, 255, 0.3);
+  --copilot-assistant-bg: rgba(44, 44, 46, 0.85);
+  --copilot-assistant-border: rgba(255, 255, 255, 0.06);
+  
+  --copilot-input-bg: rgba(118, 118, 128, 0.16);
+  --copilot-input-focus: rgba(10, 132, 255, 0.12);
+
+  --copilot-section-bg: rgba(255, 255, 255, 0.04);
+  --copilot-section-border: rgba(255, 255, 255, 0.06);
+  --copilot-section-hover: rgba(10, 132, 255, 0.08);
+}
+
+/* ── Window Shell ─────────────────────────────────────────────────────── */
+.copilot-window {
+  background: var(--copilot-glass);
+  backdrop-filter: blur(var(--copilot-blur)) saturate(var(--copilot-saturate));
+  -webkit-backdrop-filter: blur(var(--copilot-blur)) saturate(var(--copilot-saturate));
+  border: 0.5px solid var(--copilot-glass-border);
+  box-shadow: var(--copilot-glass-shadow);
+  border-radius: var(--copilot-radius-window);
+}
+
+/* ── Header ───────────────────────────────────────────────────────────── */
+.copilot-header {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 0.5px solid var(--copilot-glass-border);
+}
+
+.copilot-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  pointer-events: none;
+}
+
+.dark .copilot-header::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+}
+
+/* ── User Bubble ──────────────────────────────────────────────────────── */
+.copilot-bubble-user {
+  background: var(--copilot-user-bubble);
+  color: white;
+  border-radius: var(--copilot-radius-bubble);
+  border-bottom-right-radius: 6px;
+  box-shadow: var(--copilot-user-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.copilot-bubble-user::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ── Assistant Bubble ─────────────────────────────────────────────────── */
+.copilot-bubble-assistant {
+  background: var(--copilot-assistant-bg);
+  border: 0.5px solid var(--copilot-assistant-border);
+  border-radius: var(--copilot-radius-bubble);
+  border-bottom-left-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.dark .copilot-bubble-assistant {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Section Cards ────────────────────────────────────────────────────── */
+.copilot-section-card {
+  background: var(--copilot-section-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 0.5px solid var(--copilot-section-border);
+  border-radius: var(--copilot-radius-section);
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.copilot-section-card:hover {
+  background: var(--copilot-section-hover);
+  border-color: rgba(0, 122, 255, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 122, 255, 0.06);
+}
+
+.copilot-section-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(255, 255, 255, 0.5) 50%, transparent 90%);
+}
+
+.dark .copilot-section-card::before {
+  background: linear-gradient(90deg, transparent 10%, rgba(255, 255, 255, 0.04) 50%, transparent 90%);
+}
+
+/* ── Action Buttons ───────────────────────────────────────────────────── */
+.copilot-action-btn {
+  border-radius: var(--copilot-radius-action);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.copilot-action-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.8;
+}
+
+.copilot-action-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.copilot-action-btn:active {
+  transform: scale(0.96);
+}
+
+.copilot-action-navigate {
+  background: linear-gradient(135deg, #007AFF 0%, #0056b3 100%);
+  color: #ffffff;
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+}
+.copilot-action-navigate:hover { background: linear-gradient(135deg, #0056b3 0%, #004494 100%); box-shadow: 0 8px 24px rgba(0, 122, 255, 0.3); }
+
+.copilot-action-execute {
+  background: linear-gradient(135deg, #34C759 0%, #28a745 100%);
+  color: #ffffff;
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+}
+.copilot-action-execute:hover { background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%); box-shadow: 0 8px 24px rgba(52, 199, 89, 0.3); }
+
+.copilot-action-upgrade {
+  background: linear-gradient(135deg, #AF52DE 0%, #FF375F 100%);
+  color: #ffffff;
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+}
+.copilot-action-upgrade:hover { background: linear-gradient(135deg, #9b45c2 0%, #e62e51 100%); box-shadow: 0 8px 24px rgba(175, 82, 222, 0.4); }
+
+/* ── Smart Chip Buttons ───────────────────────────────────────────────── */
+.copilot-chip {
+  background: var(--copilot-section-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 0.5px solid var(--copilot-section-border);
+  border-radius: var(--copilot-radius-chip);
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+}
+
+.copilot-chip:hover {
+  background: var(--copilot-section-hover);
+  border-color: rgba(0, 122, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.copilot-chip:active {
+  transform: scale(0.97);
+}
+
+/* ── Input Area ───────────────────────────────────────────────────────── */
+.copilot-input-wrap {
+  background: var(--copilot-input-bg);
+  border-radius: var(--copilot-radius-input);
+  border: 1px solid transparent;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.copilot-input-wrap:focus-within {
+  background: var(--copilot-input-focus);
+  border-color: rgba(0, 122, 255, 0.3);
+  box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.08);
+}
+
+/* ── Pipeline Execution Card ──────────────────────────────────────────── */
+.copilot-pipeline-card {
+  background: linear-gradient(135deg, rgba(0, 122, 255, 0.04), rgba(88, 86, 214, 0.04));
+  border: 0.5px solid rgba(0, 122, 255, 0.1);
+  border-radius: var(--copilot-radius-section);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.copilot-pipeline-step {
+  background: var(--copilot-assistant-bg);
+  border: 0.5px solid var(--copilot-assistant-border);
+  border-radius: var(--copilot-radius-action);
+  transition: all 0.2s ease;
+}
+
+.copilot-pipeline-step:hover {
+  border-color: rgba(0, 122, 255, 0.2);
+}
+
+/* ── Thinking Indicator — Neural Pulse ───────────────────────────────── */
+@keyframes neural-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; filter: brightness(1.2) blur(1px); }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+@keyframes neural-ring {
+  0% { transform: scale(0.6) rotate(0deg); opacity: 0; }
+  50% { opacity: 0.4; }
+  100% { transform: scale(1.8) rotate(180deg); opacity: 0; }
+}
+
+.copilot-neural-orb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #007AFF, #5856D6);
+  position: relative;
+  animation: neural-pulse 2s infinite ease-in-out;
+  box-shadow: 0 0 15px rgba(0, 122, 255, 0.5);
+}
+
+.copilot-neural-ring {
+  position: absolute;
+  inset: -8px;
+  border: 1.5px solid rgba(0, 122, 255, 0.3);
+  border-radius: 50%;
+  animation: neural-ring 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.copilot-neural-ring:nth-child(2) {
+  animation-delay: 0.8s;
+  border-color: rgba(88, 86, 214, 0.2);
+}
+
+/* ── Refined Typing Cursor ────────────────────────────────────────────── */
+@keyframes copilot-cursor-glow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(0, 122, 255, 0.4); }
+  50% { opacity: 0.2; box-shadow: 0 0 0px transparent; }
+}
+
+.copilot-typing-cursor {
+  display: inline-block;
+  width: 2.5px;
+  height: 1.1em;
+  background: #007AFF;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-radius: 2px;
+  animation: copilot-cursor-glow 1s ease-in-out infinite;
+}
+
+/* ── Character Entry Animation ────────────────────────────────────────── */
+@keyframes char-appear {
+  from { opacity: 0; transform: translateY(4px) scale(0.95); filter: blur(2px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.copilot-char {
+  display: inline-block;
+  animation: char-appear 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* ── Interaction Polish ─────────────────────────────────────────────── */
+.copilot-action-btn, .copilot-chip, .copilot-fab {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.copilot-action-btn:hover, .copilot-chip:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.copilot-action-btn:active, .copilot-chip:active {
+  transform: scale(0.94);
+  filter: saturate(1.2);
+}
+
+/* ── FAB Entry Button Refinement ─────────────────────────────────────── */
+.copilot-fab {
+  background: linear-gradient(135deg, #007AFF, #0056b3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.copilot-fab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.copilot-fab:hover::before { opacity: 1; }
+
+/* ── Context Bar Refinement ──────────────────────────────────────────── */
+.copilot-context-bar {
+  background: rgba(0, 122, 255, 0.08);
+  border-bottom: 0.5px solid rgba(0, 122, 255, 0.15);
+  box-shadow: inset 0 -4px 12px rgba(0, 122, 255, 0.03);
+}
+
+/* ── Footer Badge ─────────────────────────────────────────────────────── */
+.copilot-footer-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(118, 118, 128, 0.6);
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────── */
+.copilot-scroll::-webkit-scrollbar {
+  width: 3px;
+}
+
+.copilot-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.copilot-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 99px;
+}
+
+/* ── Result Image Card ───────────────────────────────────────────────── */
+.copilot-result-card {
+  background: var(--copilot-section-bg);
+  border: 1px solid var(--copilot-glass-border);
+  cursor: zoom-in;
+}
+
+.copilot-result-card img {
+  border-radius: inherit;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.copilot-result-card:hover img {
+  transform: scale(1.02);
+}
+
+.copilot-result-card .hover-overlay {
+  background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.copilot-result-card:hover .hover-overlay {
+  opacity: 1;
+}
+
+.dark .copilot-result-card {
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Action Card (Function Calling UI) ────────────────────────────────── */
+.copilot-action-card {
+  background: var(--copilot-section-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--copilot-section-border);
+  border-radius: var(--copilot-radius-section);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.copilot-action-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 122, 255, 0.3);
+}
+
+.dark .copilot-action-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.copilot-action-card button {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  transition: all 0.3s ease;
+}
+
+.copilot-action-card button:hover {
+  filter: brightness(1.1) saturate(1.1);
+}
+
+.copilot-action-card {
+  background: var(--copilot-section-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--copilot-section-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.copilot-action-card:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.15);
+}
+
+.dark .copilot-action-card:hover {
+  background: rgba(59, 130, 246, 0.03);
+}
+
+.copilot-action-card:active {
+  transform: scale(0.98);
+}
+
+/* ── Guide Card (Step-by-Step UI) ─────────────────────────────────────── */
+.copilot-guide-card {
+  background: var(--copilot-section-bg);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid var(--copilot-section-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.dark .copilot-guide-card {
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.copilot-guide-card h5 {
+  letter-spacing: 0.15em !important;
+}
+
+.copilot-guide-card p {
+  line-height: 1.6;
+}
+
+/* ── Feature Cards (Grouped Suggestions) ──────────────────────────────── */
+.copilot-feature-category-header {
+  font-family: 'Inter', system-ui, sans-serif;
+  letter-spacing: 0.12em;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.dark .copilot-feature-category-header {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.copilot-feature-group {
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.copilot-feature-group::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0.25rem;
+  right: 0.25rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--copilot-section-border), transparent);
+  opacity: 0.5;
+}
+
+.copilot-feature-group:last-child::after {
+  display: none;
+}
